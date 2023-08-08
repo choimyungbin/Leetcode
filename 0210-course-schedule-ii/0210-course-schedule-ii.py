@@ -2,14 +2,14 @@ class Solution:
     def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
         output = []
         preMap = { i:[] for i in range(numCourses) }
-        cycle = set()
+        cycle, visit = set(), set()
         for course, pre in prerequisites:
             preMap[course].append(pre)
         
         def dfs(course):
             if course in cycle:
                 return False
-            if course in output:
+            if course in visit:
                 return True
             cycle.add(course)
             for pre in preMap[course]:
@@ -17,6 +17,7 @@ class Solution:
                     return False
             cycle.remove(course)
             output.append(course)
+            visit.add(course)
             return True
             
         for course in range(numCourses):
