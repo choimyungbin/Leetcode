@@ -9,9 +9,10 @@ class Solution:
                 hashMap[pattern].append(word)
         
         # BFS
+        # 처음 Pop하고 시작하니까 1부터시작
         res = 1
         q = collections.deque([beginWord])
-        visit = set([beginWord])
+        visit = set(beginWord)
         while q:
             for _ in range(len(q)):
                 word = q.popleft()
