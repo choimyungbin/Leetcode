@@ -1,11 +1,18 @@
 class Solution:
     def integerBreak(self, n: int) -> int:
-        return (
-            # n = 1 or 2
-            (n - 1) if n <= 3 
-            # n % 3 == 0
-            else (3 ** (n // 3)) if n % 3 == 0 
-            # n % 3 == 1
-            else (3 ** (n // 3 - 1) * 4) if n % 3 == 1 
-            # n % 3 == 2
-            else (3 ** (n // 3) * 2))
+        @cache
+        def dp(num):
+            # 1*1 < 2, 2*1 < 3 => just return itself
+            if num <= 3:
+                return num
+            
+            ans = num
+            for i in range(2, num):
+                ans = max(ans, i * dp(num - i))
+            
+            return ans
+
+        if n <= 3:
+            return n - 1
+        
+        return dp(n)
