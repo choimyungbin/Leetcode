@@ -4,7 +4,7 @@ class Solution:
         piles = sorted(piles)
         ptrL, ptrR = 0, len(piles)-1
         while ptrL < ptrR:
-            alice, me, bob = piles[ptrR], piles[ptrR-1], piles[ptrL]
+            me = piles[ptrR-1]
             res += me
             ptrL += 1
             ptrR -= 2
