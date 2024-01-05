@@ -1,28 +1,14 @@
 class Solution:
     def minOperations(self, nums: List[int]) -> int:
-        hashMap = {}
-        res = 0
-        for n in nums:
-            if n in hashMap.keys():
-                hashMap[n] += 1
-            else:
-                hashMap[n] = 1
+        from collections import Counter
+        mp = Counter(nums)
         
-        for n in hashMap.keys():
-            while hashMap[n] > 4:
-                hashMap[n] -= 3
-                res += 1
-            if hashMap[n] == 4:
-                hashMap[n] -= 4
-                res += 2
-            elif hashMap[n] == 3:
-                hashMap[n] -= 3
-                res += 1
-            elif hashMap[n] == 2:
-                hashMap[n] -= 2
-                res += 1
-            elif hashMap[n] == 1 or hashMap[n] == 0:
+        count = 0
+        for t in mp.values():
+            if t == 1:
                 return -1
-            
-        
-        return res
+            count += t // 3
+            if t % 3:
+                count += 1
+                
+        return count
