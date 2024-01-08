@@ -3,6 +3,10 @@ class Solution:
         res = []
         nums = sorted(nums)
         for i in range(len(nums)):
+            # for efficiency
+            if nums[i] > 0:
+                break
+            # ⭐️⭐️⭐️⭐️
             if i > 0 and nums[i] == nums[i-1]:
                 continue
             target = 0 - nums[i]
