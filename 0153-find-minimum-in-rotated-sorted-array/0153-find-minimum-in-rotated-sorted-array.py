@@ -1,15 +1,18 @@
 class Solution:
     def findMin(self, nums: List[int]) -> int:
-        l, r = 0, len(nums)-1
-        # ⭐️⭐️⭐️⭐️ (Because idx is going from right to left)
-        idx = r
+        # 2,1
         
+        l, r = 0, len(nums)-1
+        smallest = nums[0]
         while l <= r:
             m = (l+r)//2
-            if nums[m] <= nums[idx]:
-                idx = m
-                r = m-1
-            elif nums[m] > nums[idx]:
+            # left is sorted
+            if nums[l] <= nums[m]:
+                smallest = min(smallest, nums[l])
                 l = m+1
+            # right is sorted
+            else:
+                smallest = min(smallest, nums[m])
+                r = m-1
         
-        return nums[idx]
+        return smallest
