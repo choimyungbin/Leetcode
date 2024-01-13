@@ -5,19 +5,27 @@
 #         self.next = next
 class Solution:
     def reorderList(self, head: Optional[ListNode]) -> None:
-        node = head
+        # find middle
+        slow, fast = head, head.next
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
         
-        while node.next:
-            if not node.next.next:
-                break
-            tail = node
-            temp = node.next
-            while tail.next.next:
-                tail = tail.next
-            node.next = tail.next
-            if node != tail:
-                tail.next = None
-            node.next.next = temp
-            node = temp
+        second = slow.next
+        slow.next = None
+        # reverse second list
+        prev = None
+        while second:
+            tmp = second.next
+            second.next = prev
+            prev = second
+            second = tmp
         
-        return head
+        # merge lists
+        first, second = head, prev
+        while second:
+            tmp1, tmp2 = first.next, second.next
+            first.next = second
+            second.next = tmp1
+            first, second = tmp1, tmp2
+            
