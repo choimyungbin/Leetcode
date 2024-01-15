@@ -1,21 +1,24 @@
 class Solution:
     def findWinners(self, matches: List[List[int]]) -> List[List[int]]:
-        scores = {}
-        res = [[],[]]
-        # make scoreboard
-        for m in matches:
-            if m[0] not in scores.keys():
-                scores[m[0]] = [0,0]
-            if m[1] not in scores.keys():
-                scores[m[1]] = [0,0]
-            scores[m[0]][0] += 1
-            scores[m[1]][1] += 1
+        zeroLoss, oneLoss, moreLoss = set(),set(),set()
         
-        for player in scores.keys():
-            if scores[player][1] == 0:
-                res[0].append(player)
-            elif scores[player][1] == 1:
-                res[1].append(player)
-        res[0].sort()
-        res[1].sort()
-        return res
+        for m in matches:
+            winner, loser = m[0], m[1]
+            
+            # add winner
+            if winner not in oneLoss and winner not in moreLoss:
+                zeroLoss.add(winner)
+            
+            # add loser
+            if loser in zeroLoss:
+                zeroLoss.remove(loser)
+                oneLoss.add(loser)
+            elif loser in oneLoss:
+                oneLoss.remove(loser)
+                moreLoss.add(loser)
+            elif loser in moreLoss:
+                continue
+            else:
+                oneLoss.add(loser)
+            
+        return [sorted(list(zeroLoss)), sorted(list(oneLoss))]
