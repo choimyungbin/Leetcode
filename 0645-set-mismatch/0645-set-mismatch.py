@@ -4,9 +4,6 @@ class Solution:
         numSet = set()
         duplicate = 0
         missing = 0
-        for n in range(1,len(nums)+1):
-            if n not in nums:
-                missing = n
         for n in nums:
             # not duplicate
             if n not in numSet:
@@ -14,5 +11,8 @@ class Solution:
             # duplicate
             else:
                 duplicate = n
+        for n in range(1,len(nums)+1):
+            if n not in numSet:
+                missing = n
         
         return [duplicate, missing]
