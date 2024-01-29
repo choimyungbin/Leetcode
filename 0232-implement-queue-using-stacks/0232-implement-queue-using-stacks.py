@@ -3,10 +3,8 @@ class MyQueue:
     def __init__(self):
         self.stack1 = []
         self.stack2 = []
-        self.top = 0
 
     def push(self, x: int) -> None:
-        # O(1)
         self.stack1.append(x)
         
     def pop(self) -> int:
