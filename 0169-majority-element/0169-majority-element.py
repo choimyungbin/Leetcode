@@ -1,6 +1,8 @@
 class Solution:
     def majorityElement(self, nums: List[int]) -> int:
-        counter = Counter(nums)
-        for n, count in counter.items():
-            if count > len(nums)//2:
+        hashMap = {}
+        majority = len(nums) // 2
+        for n in nums:
+            hashMap[n] = 1+hashMap.get(n, 0)
+            if hashMap[n] > majority:
                 return n
