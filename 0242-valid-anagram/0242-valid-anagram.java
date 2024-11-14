@@ -3,9 +3,6 @@ import java.util.Map;
 
 class Solution {
     public boolean isAnagram(String s, String t) {
-        if (s.length() != t.length()){
-            return false;
-        }
         Map<Character, Integer> hashMapS = new HashMap();
         Map<Character, Integer> hashMapT = new HashMap();
         
