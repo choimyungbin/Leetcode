@@ -1,20 +1,20 @@
 import java.util.HashMap;
+import java.util.Map;
 
 class Solution {
     public boolean isAnagram(String s, String t) {
-        if (s.length() != t.length()) {
+        if (s.length() != t.length()){
             return false;
         }
-        int[] counter = new int[26];
-        for (int i = 0; i < s.length(); i++) {
-            counter[s.charAt(i) - 'a']++;
-            counter[t.charAt(i) - 'a']--;
+        Map<Character, Integer> hashMapS = new HashMap();
+        Map<Character, Integer> hashMapT = new HashMap();
+        
+        for (char c:s.toCharArray()){
+            hashMapS.put(c, hashMapS.getOrDefault(c, 0)+1);
         }
-        for (int count : counter) {
-            if (count != 0) {
-                return false;
-            }
+        for (char c:t.toCharArray()){
+            hashMapT.put(c, hashMapT.getOrDefault(c, 0)+1);
         }
-        return true;
+        return hashMapS.equals(hashMapT);
     }
 }
