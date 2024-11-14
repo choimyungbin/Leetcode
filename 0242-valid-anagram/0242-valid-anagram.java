@@ -2,17 +2,19 @@ import java.util.HashMap;
 
 class Solution {
     public boolean isAnagram(String s, String t) {
-        HashMap<Character, Integer> hashMapS = new HashMap<>();
-        HashMap<Character, Integer> hashMapT = new HashMap<>();
-        
-        for (char c : s.toCharArray()) {
-            hashMapS.put(c, hashMapS.getOrDefault(c, 0) + 1);
+        if (s.length() != t.length()) {
+            return false;
         }
-        
-        for (char c : t.toCharArray()) {
-            hashMapT.put(c, hashMapT.getOrDefault(c, 0) + 1);
+        int[] counter = new int[26];
+        for (int i = 0; i < s.length(); i++) {
+            counter[s.charAt(i) - 'a']++;
+            counter[t.charAt(i) - 'a']--;
         }
-        
-        return hashMapS.equals(hashMapT);
+        for (int count : counter) {
+            if (count != 0) {
+                return false;
+            }
+        }
+        return true;
     }
 }
